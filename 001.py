@@ -1,25 +1,28 @@
-import telegram.ext
+import telegram
 import asyncio
 
-from telegram.ext import Updater, CommandHandler
-from telegram import InputFile, InputMediaDocument
+'''
+métodos da classe Bot do Telegram:
+    send_photo:Envia uma foto
+    send_audio: Envia um arquivo de áudio.
+    send_document: Envia um arquivo como documento.
+    send_video: Envia um arquivo de vídeo.
+    send_animation: Envia um arquivo de animação (GIF).
+    send_voice: Envia um arquivo de voz.
+    send_video_note: Envia uma nota de vídeo.
+    send_sticker: Envia um sticker.
+    send_contact: Envia um contato.
+    send_location: Envia uma localização.
+    send_venue: Envia uma localização com informações adicionais.
+'''
+
+TOKEN = '5880526703:AAHZayZxHKtCx-4tQmoS3yPAg7t36zzvsCM'
+CHAT = '-945678840'
+FILE = 'C:\\Users\\020163631\\Documents\\Pessoal\\Projetos\\telegram_sendfile\\001.txt'
 
 async def send_file():
-    # meu token do seu bot
-    bot = telegram.Bot(token='35880526703:AAHZayZxHKtCx-4tQmoS3yPAg7t36zzvsCM')
-
-    # caminho e nome do seu arquivo
-    with open('C:/Users/LAB/Documents/Python/001.txt', 'rb') as f:
-        file = InputFile(f)
-
-    # ID do chat que você deseja enviar o arquivo
-    chat_id = '-945678840'
-
-    # Cria um novo documento de mídia
-    document = InputMediaDocument(file)
-
-    # Envia o arquivo e espera a conclusão da operação
-    await bot.send_media_group(chat_id=chat_id, media=[document])
-
-# Executa a função assíncrona dentro de um loop de eventos
-asyncio.run(send_file())
+    with open(FILE, 'rb') as f:
+        bot = telegram.Bot(token=TOKEN)
+        await bot.send_document(chat_id=CHAT, document=f)
+loop = asyncio.get_event_loop()
+loop.run_until_complete(send_file())
